@@ -10,13 +10,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: jacbug/alpine-py2-py3-r:1.0.0
     
     - name: Log in to Docker Hub
       uses: docker/login-action@v3
@@ -24,3 +17,9 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: jacbug/alpine-py2-py3-r:1.0.0
