@@ -95,6 +95,7 @@ spec:
 - Install nginx or similar
 - Ensure that a loadbalancer is created, dns records updated, and have restricted the IPs from where traffic is coming from (if public restrict from CDN IPs). Also ensure that SSL is working fine.
 - Create an ingress.yaml for the application to allow a connection through the loadbalancer and configure the rules accordingly.
+- Ideally both app + service + ingress are installed via a helm chart.
 - For the sake of this exercise, I will just create a service and expose it via type: LoadBalancer
 
 apiVersion: v1
@@ -112,6 +113,7 @@ spec:
 
 ## Every step mentioned above have to be in a code repository with automated CI/CD
 - https://github.com/jbugeja/test-repo
+- The CI/CD pipeline does not finish successfully as I did not setup a kubernetes cluster.
 
 ## How would you monitor the above deployment? Explain or implement the tools that you would use
 - Prometheus for metric collection and storage
