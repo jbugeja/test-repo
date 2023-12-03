@@ -23,3 +23,18 @@ jobs:
         context: .
         push: true
         tags: jacbug/alpine-py2-py3-r:1.0.0
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
+    - name: Deploy to cluster
+      run: kubectl apply -f swish-app.yaml
+      env:
+        KUBECONFIG: ${{ secrets.KUBE_CONFIG_DATA }}

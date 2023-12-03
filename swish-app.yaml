@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swish-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swish-app
+  template:
+    metadata:
+      labels:
+        app: swish-app
+    spec:
+      containers:
+      - name: swish-container
+        image: jacbug/alpine-py2-py3-r:1.0.0
+        command: ["/bin/sh"]
+        args: ["-c", "tail -f /dev/null"]
+        ports:
+        - name:  http
+          containerPort:  8080
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: swish-service
+spec:
+  selector:
+    app: swish-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer

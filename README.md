@@ -17,7 +17,7 @@
 
 I used trivy to scan for vulnerabilities for OS and for python. For R we would need to include also something like oysteR. 
 In the report generated, the issues are due to using python2. Ideally migrating to python3 would be the best solution.
-Where possible, if using specified versions for packages try to update to the latest or at least to the versions which solves the vulnerability. 
+Where possible, if using specified versions for packages try to update to the latest or at least to the version which solves the vulnerability. 
 
 alpine-py2-py3-r:1.0.0 (alpine 3.18.5)
 ======================================
@@ -111,5 +111,13 @@ spec:
   type: LoadBalancer
 
 ## Every step mentioned above have to be in a code repository with automated CI/CD
+- https://github.com/jbugeja/test-repo
 
 ## How would you monitor the above deployment? Explain or implement the tools that you would use
+- Prometheus for metric collection and storage
+- Node Exporter to collect node metrics
+- kube-state-metrics to collect kubernetes resources
+- Loki for log aggregation
+- promtail for shipping logs to loki
+- Grafana for visualising data from prometheus and loki + for alerting
+- Jaeger to monitor and troubleshoot transactions
